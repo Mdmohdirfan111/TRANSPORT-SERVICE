@@ -150,12 +150,19 @@ body {
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
 }
 
+/* Header Title Input with BG Color Added */
 .title-input {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: #4f46e5;
+  color: #ffffff;
+  background: var(--primary-gradient);
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  padding: 14px 18px;
+}
+
+.title-input::placeholder {
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .header-details {
@@ -247,7 +254,7 @@ td {
   color: #b91c1c;
 }
 
-/* Dynamic Column Headers Input */
+/* Dynamic Column Header Input */
 th input.th-input {
   background: transparent;
   border: none;
@@ -305,12 +312,12 @@ th input.th-input:focus {
   font-weight: 600;
 }
 
-/* Hide controls/action column when rendering PDF */
+/* PDF Export Cleanup Modifications */
 .pdf-export-mode .action-col {
   display: none !important;
 }
 
-.pdf-export-mode .styled-input,
+.pdf-export-mode .styled-input:not(.title-input),
 .pdf-export-mode .table-input,
 .pdf-export-mode .th-input {
   border: none !important;
