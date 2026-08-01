@@ -8,13 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const downloadPdfBtn = document.getElementById('download-pdf-btn');
   const totalCostDisplay = document.getElementById('total-cost-display');
 
-  // Sync Service Name Input with Footer Banner
+  // Sync Transport Service Name with Footer Message
   serviceNameInput.addEventListener('input', (e) => {
     const value = e.target.value.trim();
-    footerServiceName.textContent = value.length > 0 ? value : '(Your Transport Service Name)';
+    footerServiceName.textContent = value;
   });
 
-  // Recalculate Total Cost
+  // Calculate Total Cost in Rupee (₹)
   function calculateTotal() {
     let total = 0;
     const costInputs = document.querySelectorAll('.cost-input');
@@ -26,17 +26,17 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    totalCostDisplay.textContent = `$${total.toFixed(2)}`;
+    totalCostDisplay.textContent = `₹${total.toFixed(2)}`;
   }
 
-  // Delegate input listeners on table body to automatically recalculate cost
+  // Recalculate total on table input changes
   tableBody.addEventListener('input', (e) => {
     if (e.target.classList.contains('cost-input')) {
       calculateTotal();
     }
   });
 
-  // Delete Row Functionality
+  // Remove Row functionality
   tableBody.addEventListener('click', (e) => {
     const deleteBtn = e.target.closest('.delete-row-btn');
     if (deleteBtn) {
@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         row.remove();
         calculateTotal();
       } else {
-        alert("The table must contain at least one row.");
+        alert("At least one row is required.");
       }
     }
   });
@@ -59,11 +59,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const td = document.createElement('td');
       
       if (i === colCount - 1) {
-        // Action column
+        // Action Button Column
         td.className = 'action-col';
         td.innerHTML = `<button class="delete-row-btn" title="Remove Row"><i class="fa-solid fa-trash-can"></i></button>`;
       } else if (i === 3) {
-        // Cost input column
+        // Cost Column
         td.innerHTML = `<input type="number" class="table-input cost-input" placeholder="0.00">`;
       } else {
         td.innerHTML = `<input type="text" class="table-input" placeholder="Enter Details">`;
@@ -76,18 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
     calculateTotal();
   });
 
-  // Add New Dynamic Column
+  // Add Dynamic Column
   addColBtn.addEventListener('click', () => {
-    const colName = prompt("Enter new column name:", "Additional Info");
+    const colName = prompt("Enter new column header name:", "Additional Info");
     if (!colName) return;
 
-    // Insert new <th> before the Action column
+    // Add new <th> header
     const actionTh = tableHeadRow.querySelector('.action-col');
     const newTh = document.createElement('th');
     newTh.innerHTML = `<input type="text" class="th-input" value="${colName}">`;
     tableHeadRow.insertBefore(newTh, actionTh);
 
-    // Insert new <td> into every row in tbody
+    // Add new <td> in all table rows
     const rows = tableBody.querySelectorAll('tr');
     rows.forEach(row => {
       const actionTd = row.querySelector('.action-col');
@@ -97,14 +97,12 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Direct PDF Download without Print Dialog
+  // Direct PDF Download Logic
   downloadPdfBtn.addEventListener('click', () => {
     const element = document.getElementById('receipt-card');
 
-    // Add CSS flag class for export cleanup
     element.classList.add('pdf-export-mode');
 
-    // PDF Configuration options
     const opt = {
       margin:       [0.3, 0.3, 0.3, 0.3],
       filename:     'Transport_Receipt.pdf',
@@ -113,13 +111,11 @@ document.addEventListener('DOMContentLoaded', () => {
       jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
     };
 
-    // Generate PDF directly
     html2pdf().set(opt).from(element).save().then(() => {
-      // Remove export cleanup class after generation completes
       element.classList.remove('pdf-export-mode');
     });
   });
 
-  // Initialize total on start
+  // Initial Calculation setup
   calculateTotal();
 });
