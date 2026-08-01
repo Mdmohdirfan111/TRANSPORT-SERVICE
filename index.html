@@ -5,15 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Transport Service Receipt Generator</title>
   
-  <!-- Google Fonts for Modern Typography -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   
-  <!-- FontAwesome for Icons -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
   
-  <!-- html2pdf.js Library for direct PDF Download -->
+  <!-- html2pdf.js for direct PDF Download -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   
   <link rel="stylesheet" href="style.css" />
@@ -32,10 +32,10 @@
       </div>
     </div>
 
-    <!-- Document Card (This content will be exported as PDF) -->
+    <!-- Document Card (Exported as PDF) -->
     <div id="receipt-card" class="receipt-card">
       
-      <!-- Top Decorative Accent Bar -->
+      <!-- Top Accent Bar -->
       <div class="accent-bar"></div>
 
       <!-- Service Details Header -->
@@ -45,8 +45,8 @@
             type="text" 
             id="service-name-input" 
             class="styled-input title-input" 
-            placeholder="ENTER YOUR TRANSPORT SERVICE NAME" 
-            value="EXPRESS LOGISTICS & TRANSPORT"
+            placeholder="INPUT YOUR TRANSPORT SERVICE NAME" 
+            value=""
           />
         </div>
         <div class="header-details">
@@ -57,7 +57,7 @@
               id="mobile-input" 
               class="styled-input detail-input" 
               placeholder="ENTER MOBILE NUMBER"
-              value="+1 (555) 019-2834"
+              value=""
             />
           </div>
           <div class="input-field-group">
@@ -67,7 +67,7 @@
               id="address-input" 
               class="styled-input detail-input" 
               placeholder="ENTER YOUR ADDRESS"
-              value="124 Industrial Parkway, Suite 400, New York, NY"
+              value=""
             />
           </div>
         </div>
@@ -81,23 +81,16 @@
               <th>Location</th>
               <th>Route</th>
               <th>Vehicle Number</th>
-              <th>Cost ($)</th>
+              <th>Cost (₹)</th>
               <th class="action-col">Action</th>
             </tr>
           </thead>
           <tbody id="table-body">
             <tr>
-              <td><input type="text" class="table-input" value="Terminal A" placeholder="Location"></td>
-              <td><input type="text" class="table-input" value="Route 66 Express" placeholder="Route"></td>
-              <td><input type="text" class="table-input" value="NY-8842-TR" placeholder="Vehicle No."></td>
-              <td><input type="number" class="table-input cost-input" value="450.00" placeholder="0.00"></td>
-              <td class="action-col"><button class="delete-row-btn" title="Remove Row"><i class="fa-solid fa-trash-can"></i></button></td>
-            </tr>
-            <tr>
-              <td><input type="text" class="table-input" value="Warehouse B" placeholder="Location"></td>
-              <td><input type="text" class="table-input" value="Interstate 95" placeholder="Route"></td>
-              <td><input type="text" class="table-input" value="CA-1029-LOG" placeholder="Vehicle No."></td>
-              <td><input type="number" class="table-input cost-input" value="320.00" placeholder="0.00"></td>
+              <td><input type="text" class="table-input" placeholder="Enter Location"></td>
+              <td><input type="text" class="table-input" placeholder="Enter Route"></td>
+              <td><input type="text" class="table-input" placeholder="Enter Vehicle No."></td>
+              <td><input type="number" class="table-input cost-input" placeholder="0.00"></td>
               <td class="action-col"><button class="delete-row-btn" title="Remove Row"><i class="fa-solid fa-trash-can"></i></button></td>
             </tr>
           </tbody>
@@ -107,13 +100,13 @@
       <!-- Total Summary Bar -->
       <div class="summary-card">
         <span class="total-label">TOTAL COST:</span>
-        <span class="total-amount" id="total-cost-display">$770.00</span>
+        <span class="total-amount" id="total-cost-display">₹0.00</span>
       </div>
 
       <!-- Footer Greeting -->
       <footer class="receipt-footer">
         <p class="thank-you-msg">
-          Thank you for choosing <span id="footer-service-name">EXPRESS LOGISTICS & TRANSPORT</span>!
+          Thank you for choosing <span id="footer-service-name"></span>!
         </p>
       </footer>
 
